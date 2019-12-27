@@ -1,0 +1,5 @@
+*.java linguist-language=Java
+*.js linguist-language=js
+*.css linguist-language=css
+*.html linguist-language=html
+*.ftl linguist-language=html

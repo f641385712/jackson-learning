@@ -1,0 +1,71 @@
+﻿HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### eclipse ###
+.settings/
+.project
+.classpath
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### temp ignore ###
+*.orig
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+### system ignore ###
+.DS_Store
+Thumbs.db
+
+### environment ignore ###
+src/main/webapp/WEB-INF/classes/*
+PyBuilder
+*/target/
+
+### ===============diy=================== ###
+/scaffold.py
+.flattened-pom.xml
+catalina.base_IS_UNDEFINED
+
+### Spring Boot/Cloud。此两个文件一般用于本地调试，并不建议提交###
+application.properties
+bootstrap.properties
+
+application.pid
+application.port
+# vkmq config ignore
+vkmq.config
+# meteor runtime ignore
+/logs
+/runtime
+/work
