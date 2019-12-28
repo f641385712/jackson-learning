@@ -14,6 +14,8 @@ public class JsonParserReadValueAsTest {
 
         // 此处InputStream来自于文件
         JsonParser jsonParser = factory.createParser(new File("java-jackson/src/main/resources/person.json"));
+        jsonParser.setCodec(new MyObjectCodec()); // 若使用readValueAs系列方法，必须指定解码器
+
         Person person = jsonParser.readValueAs(Person.class);
         System.out.println(person);
 
