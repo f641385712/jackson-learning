@@ -6,11 +6,21 @@ import com.fasterxml.jackson.core.JsonToken;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 public class JsonParserTest {
 
     public static void main(String[] args) throws IOException {
-        JsonFactory factory = new JsonFactory();
+        // 1、直接new的方式
+        // JsonFactory factory = new JsonFactory();
+        // 2、更具弹性的SPI方式
+        JsonFactory factory = null;
+        ServiceLoader<JsonFactory> load = ServiceLoader.load(JsonFactory.class);
+        Iterator<JsonFactory> it = load.iterator();
+        if (it.hasNext()) { // 此处是if不是while，因为我只需要一个而已
+            factory = it.next();
+        }
 
         // 此处InputStream来自于文件
         JsonParser jsonParser = factory.createParser(new File("java-jackson/src/main/resources/person.json"));
