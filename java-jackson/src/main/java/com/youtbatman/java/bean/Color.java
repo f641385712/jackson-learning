@@ -1,5 +1,10 @@
 package com.youtbatman.java.bean;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+
 public enum Color {
-    RED, WHITE, BLACK;
+    @JsonEnumDefaultValue
+    RED,
+    WHITE,
+    BLACK;
 }
