@@ -1,5 +1,7 @@
 package com.youtbatman.java.bean;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.util.List;
@@ -9,7 +11,7 @@ public class Person {
     private List<Long> ids;
 
 
-
+    @JsonSerialize(using = JsonSerializer.None.class)
     private String name;
     private Integer age;
     private List<String> hobbies;
