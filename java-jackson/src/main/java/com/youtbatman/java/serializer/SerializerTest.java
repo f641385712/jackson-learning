@@ -1,10 +1,8 @@
 package com.youtbatman.java.serializer;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +10,16 @@ import lombok.Setter;
 import lombok.ToString;
 import org.junit.Test;
 
-import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class SerializerTest {
 
@@ -21,21 +27,81 @@ public class SerializerTest {
     public void fun1() throws JsonProcessingException {
         JsonMapper jsonMapper = new JsonMapper();
 
-        // SimpleModule simpleModule = new SimpleModule();
-        // simpleModule.addSerializer(Person.class, new PersonSerializer(Person.class));
-        // jsonMapper.registerModule(simpleModule);
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
 
-        Person person = new Person();
-        System.out.println(jsonMapper.writeValueAsString(person));
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(jsonMapper.writeValueAsString(entry));
+        }
     }
 
+    @Test
+    public void fun2() throws JsonProcessingException {
+        JsonMapper jsonMapper = new JsonMapper();
+
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+
+        System.out.println(jsonMapper.writeValueAsString(map));
+    }
+
+
+    @Test
+    public void fun3() throws JsonProcessingException {
+        JsonMapper jsonMapper = new JsonMapper();
+
+        System.out.println(jsonMapper.writeValueAsString(Arrays.asList(1, 2, 3)));
+        System.out.println(jsonMapper.writeValueAsString(Arrays.asList("1", "2", "3")));
+
+        System.out.println(jsonMapper.writeValueAsString(new Integer[]{1, 2, 3}));
+        System.out.println(jsonMapper.writeValueAsString(new Character[]{'1', '2', '3'}));
+        System.out.println(jsonMapper.writeValueAsString(new String[]{"1", "2", "3"}));
+    }
+
+
+    @Test
+    public void fun4() throws JsonProcessingException {
+        JsonMapper jsonMapper = new JsonMapper();
+
+        System.out.println(jsonMapper.writeValueAsString("hello world"));
+    }
+
+
+    @Test
+    public void fun5() throws JsonProcessingException {
+        JsonMapper jsonMapper = new JsonMapper();
+
+        System.out.println(jsonMapper.writeValueAsString(UUID.randomUUID()));
+    }
+
+    @Test
+    public void fun6() throws JsonProcessingException {
+        JsonMapper jsonMapper = new JsonMapper();
+
+        System.out.println(jsonMapper.writeValueAsString(InetSocketAddress.createUnresolved("localhost", 8080)));
+    }
+
+
+    @Test
+    public void fun7() throws JsonProcessingException {
+        JsonMapper jsonMapper = new JsonMapper();
+        jsonMapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        System.out.println(jsonMapper.writeValueAsString(LocalDateTime.now()));
+        System.out.println(jsonMapper.writeValueAsString(LocalDate.now()));
+        System.out.println(jsonMapper.writeValueAsString(LocalTime.now()));
+        System.out.println(jsonMapper.writeValueAsString(Instant.now()));
+    }
 
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     @Setter
     @ToString
-    // @JsonSerialize(using = PersonSerializer.class)
     private static class Person {
         private String name = "YourBatman";
         private Integer age = 18;
@@ -45,23 +111,5 @@ public class SerializerTest {
     }
 
 
-    private static class PersonSerializer extends StdSerializer<Person> {
-
-        // 提供空构造是为了让可以使用注解方式，一般建议提供
-        public PersonSerializer() {
-            this(Person.class);
-        }
-
-        protected PersonSerializer(Class<Person> t) {
-            super(t);
-        }
-
-        @Override
-        public void serialize(Person value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-            gen.writeStartObject();
-            gen.writeStringField("jsonStr", value.toString());
-            gen.writeEndObject();
-        }
-    }
 }
 

@@ -49,4 +49,13 @@ public class Test {
     }
 
 
+    @org.junit.Test
+    public void fun2(){
+        // 2 -> 10
+        // 3 -> 11
+        // 异或后结果：01（二进制数）
+        System.out.println(Integer.toBinaryString(2 ^ 3));
+    }
+
+
 }
