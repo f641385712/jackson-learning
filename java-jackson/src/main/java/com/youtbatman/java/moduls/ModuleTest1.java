@@ -1,4 +1,4 @@
-package com.youtbatman.java.module;
+package com.youtbatman.java.moduls;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
