@@ -54,7 +54,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
             Class<AbstractJackson2HttpMessageConverter> jacksonClazz = AbstractJackson2HttpMessageConverter.class;
             if (jacksonClazz.isAssignableFrom(c.getClass())) {
                 AbstractJackson2HttpMessageConverter jacksonConverter = jacksonClazz.cast(c);
-                jacksonConverter.getObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+                // 定制HttpMessageConverter消息转换器的ObjectMapper实例
+                ObjectMapper objectMapper = jacksonConverter.getObjectMapper();
+                objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
             }
         });
     }

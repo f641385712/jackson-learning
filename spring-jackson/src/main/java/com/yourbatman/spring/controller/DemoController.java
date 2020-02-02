@@ -25,8 +25,15 @@ import java.util.Map;
 @RequestMapping("/demo")
 public class DemoController {
 
-    // @Autowired
-    // ObjectMapper objectMapper;
+    @Autowired
+    ObjectMapper mapper;
+
+    @GetMapping("/objectMapper2")
+    public Object objectMapper2() throws Exception {
+        return mapper.writeValueAsString(new Date());
+    }
+
+
 
     @GetMapping("/objectMapper1")
     public Object objectMapper1() throws Exception {
