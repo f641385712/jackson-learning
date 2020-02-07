@@ -33,14 +33,14 @@ public class TestCase {
 
     private static void jacksonSer(ObjectMapper mapper, Object obj) {
         try {
-            mapper.writeValueAsString(OBJS);
+            mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
 
     private static void fastjsonSer(Object obj) {
-        JSON.toJSONString(OBJS);
+        JSON.toJSONString(obj);
     }
 
     // 这里仅是把Runnable当作@FunctionalInterface来使而已，并不是启线程
